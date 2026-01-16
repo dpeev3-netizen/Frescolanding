@@ -20,10 +20,42 @@ import img5thSectionDocumentIcon from "figma:asset/f16b0f34546cc9d7668fa602134ef
 import img5thSectionHouseIcon from "figma:asset/01004047fded41289af36cccf939e63390847d73.png";
 import img5thSectionPhoneIcon from "figma:asset/307e4608fe3ef7e70e56c76f4cf9a4a92a527ed1.png";
 import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 
-export default function FrescoLandingPageFinal() {
+interface FrescoLandingPageFinalProps {
+  onButtonClick?: () => void;
+}
+
+export default function FrescoLandingPageFinal({ onButtonClick }: FrescoLandingPageFinalProps = {}) {
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const updateScale = () => {
+      const viewportWidth = window.innerWidth;
+      const designWidth = 1440;
+      
+      // Calculate scale factor for all viewport sizes
+      const newScale = viewportWidth / designWidth;
+      setScale(newScale);
+    };
+
+    updateScale();
+    window.addEventListener('resize', updateScale);
+    return () => window.removeEventListener('resize', updateScale);
+  }, []);
+
   return (
-    <div className="bg-white relative size-full" data-name="FRESCO LANDING PAGE FINAL">
+    <div className="bg-white w-full min-h-screen overflow-x-hidden">
+      <div 
+        className="bg-white relative mx-auto"
+        style={{
+          width: '1440px',
+          height: '4328px',
+          transformOrigin: 'top center',
+          transform: `scale(${scale})`,
+        }}
+        data-name="FRESCO LANDING PAGE FINAL"
+      >
       {/* Background sections */}
       <div className="absolute h-[765px] left-0 top-[2091px] w-[1440px]" data-name="4th section background gradient">
         <div className="absolute bg-gradient-to-b from-[8.484%] from-[rgba(24,81,57,0.6)] inset-0 to-[92.876%] to-[rgba(54,183,129,0)]" />
@@ -173,7 +205,7 @@ export default function FrescoLandingPageFinal() {
       </motion.div>
       <motion.div 
         className="absolute h-[80px] left-[587px] top-[2683px] w-[266px]" 
-        data-name="Проверени процедури, обучен екип и контрол на качеството – за резултати, които говорят сами."
+        data-name="Проверени процедури, обучен екип и контрол на качеството  за резултати, които говорят сами."
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.3 }}
@@ -190,7 +222,7 @@ export default function FrescoLandingPageFinal() {
         viewport={{ once: true }}
       >
         <div className="absolute font-['Montserrat:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#072422] text-[16px] text-center tracking-[1.6px] whitespace-pre-wrap">
-          <p className="mb-0">Служителите ни преминават през проверки и обучения, за да работят безопасно в чувствителни среди.</p>
+          <p className="mb-0">Служителите ни преминават през проверки и обучения, за да работят езопасно в чувствителни среди.</p>
           <p>&nbsp;</p>
         </div>
       </motion.div>
@@ -378,7 +410,7 @@ export default function FrescoLandingPageFinal() {
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
       >
-        <p className="absolute font-['Montserrat:SemiBold',sans-serif] font-semibold inset-0 leading-[normal] text-[#072422] text-[22px] tracking-[2.2px] whitespace-pre-wrap">Довериха ни се:</p>
+        <p className="absolute font-['Montserrat:SemiBold',sans-serif] font-semibold inset-0 leading-[normal] text-[#072422] text-sm md:text-lg lg:text-[22px] tracking-[1.4px] md:tracking-[1.8px] lg:tracking-[2.2px] whitespace-nowrap">Довериха ни се:</p>
       </motion.div>
 
       {/* Partner logos with staggered animations */}
@@ -503,8 +535,11 @@ export default function FrescoLandingPageFinal() {
       </motion.div>
 
       {/* CTA buttons with animations */}
-      <motion.div 
-        className="absolute h-[60px] left-[515px] top-[1943px] w-[400px]" 
+      <motion.a 
+        href="https://fresco-bg.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute h-[70px] left-[490px] top-[1938px] w-[460px] cursor-pointer" 
         data-name="3rd section cta"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -513,7 +548,7 @@ export default function FrescoLandingPageFinal() {
         whileHover={{ scale: 1.05, y: -3 }}
       >
         <div className="absolute bg-[#91cea2] inset-0 rounded-[2025px] shadow-[0px_3px_20px_2px_rgba(0,0,0,0.3)] transition-all" />
-        <p className="absolute font-['Montserrat:SemiBold',sans-serif] font-semibold inset-[28.33%_19.25%_23.33%_18.25%] leading-[normal] text-[#072422] text-[24px] tracking-[2.4px] whitespace-pre-wrap">{`ВСИЧКИ УСЛУГИ `}</p>
+        <p className="absolute font-['Montserrat:SemiBold',sans-serif] font-semibold flex items-center justify-end inset-0 leading-[normal] text-[#072422] text-[24px] tracking-[2.4px] whitespace-nowrap pr-[15%]">КЪМ НАШИЯТ УЕБСАЙТ</p>
         <motion.div 
           className="absolute inset-[51.67%_9.5%_48.33%_87.25%]"
           animate={{ x: [0, 5, 0] }}
@@ -525,7 +560,7 @@ export default function FrescoLandingPageFinal() {
             </svg>
           </div>
         </motion.div>
-      </motion.div>
+      </motion.a>
 
       {/* Hero background and images */}
       <div className="absolute h-[728px] left-0 top-[98px] w-[1440px]" data-name="background hero image">
@@ -569,7 +604,7 @@ export default function FrescoLandingPageFinal() {
         <div className="absolute bg-[#092422] inset-0 shadow-[0px_5px_40px_10px_rgba(0,0,0,0.4)]" />
       </motion.div>
       <motion.div 
-        className="absolute left-[54px] size-[148px] top-[-22px]" 
+        className="absolute left-[54px] size-[200px] top-[-50px]" 
         data-name="fresko logo transparent header"
         initial={{ opacity: 0, rotate: -10 }}
         animate={{ opacity: 1, rotate: 0 }}
@@ -635,12 +670,13 @@ export default function FrescoLandingPageFinal() {
 
       {/* Hero CTA button */}
       <motion.div 
-        className="absolute h-[60px] left-[119px] top-[525px] w-[621px]" 
+        className="absolute h-[60px] left-[119px] top-[525px] w-[621px] cursor-pointer" 
         data-name="cta 1 - hero section"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.9 }}
         whileHover={{ scale: 1.05, y: -3 }}
+        onClick={onButtonClick}
       >
         <div className="absolute bg-[#91cea2] inset-0 rounded-[2025px] shadow-[0px_3px_30px_3px_rgba(0,0,0,0.4)] transition-all" />
         <p className="absolute bottom-[26.67%] font-['Montserrat:SemiBold',sans-serif] font-semibold leading-[normal] left-[29.95%] right-[29.79%] text-[#072422] text-[24px] top-1/4 tracking-[2.4px] whitespace-nowrap text-left m-[0px]">КЪМ ЧИСТОТАТА</p>
@@ -659,13 +695,14 @@ export default function FrescoLandingPageFinal() {
 
       {/* Bottom CTA */}
       <motion.div 
-        className="absolute h-[60px] left-[520px] top-[3821px] w-[400px]" 
+        className="absolute h-[60px] left-[520px] top-[3821px] w-[400px] cursor-pointer" 
         data-name="5th section cta"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
         whileHover={{ scale: 1.05, y: -3 }}
+        onClick={onButtonClick}
       >
         <div className="absolute bg-[#91cea2] inset-0 rounded-[2025px] shadow-[0px_3px_20px_2px_rgba(0,0,0,0.3)] transition-all" />
         <p className="absolute font-['Montserrat:SemiBold',sans-serif] font-semibold inset-[28.33%_13.25%_23.33%_14.5%] leading-[normal] text-[#072422] text-[24px] tracking-[2.4px] whitespace-pre-wrap">ИЗПРАТИ ЗАЯВКА</p>
@@ -831,6 +868,30 @@ export default function FrescoLandingPageFinal() {
           </div>
         </div>
       </motion.div>
+
+      {/* Header CTA button */}
+      <motion.div 
+        className="absolute h-[50px] left-[1095px] top-[25px] w-[300px] cursor-pointer" 
+        data-name="header cta button"
+        whileHover={{ scale: 1.05, y: -2 }}
+        transition={{ type: "spring", stiffness: 300 }}
+        onClick={onButtonClick}
+      >
+        <div className="absolute bg-[#91cea2] inset-0 rounded-[2025px] shadow-[0px_3px_20px_2px_rgba(0,0,0,0.3)] transition-all" />
+        <p className="absolute font-['Montserrat:SemiBold',sans-serif] font-semibold flex items-center justify-center inset-0 leading-[normal] text-[#072422] text-[16px] tracking-[1.8px] whitespace-nowrap pr-[8%]">НАПРАВИ ЗАПИТВАНЕ</p>
+        <motion.div 
+          className="absolute inset-[45%_8%_45%_88%]"
+          animate={{ x: [0, 5, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
+          <div className="absolute inset-[-8.66px_0_-8.66px_-15.38%] scale-[0.6]">
+            <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 15 17.3205">
+              <path d={svgPaths.p23537280} fill="var(--stroke-0, #072422)" id="Arrow 1" />
+            </svg>
+          </div>
+        </motion.div>
+      </motion.div>
+    </div>
     </div>
   );
 }
